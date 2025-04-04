@@ -696,8 +696,6 @@ main {
 
 .feature-icon-container {
     margin-bottom: 25px;
-
-
     width: 115px;
     height: 115px;
     margin: 0 auto 25px auto;
@@ -706,15 +704,15 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-  
+    padding: 15px; /* Añadir padding para que el icono no toque los bordes */
 }
 
 .feature-icon {
-    /* Define un tamaño más grande para tus iconos/imágenes */
-    width: 100px;  /* Ajusta este valor */
-    height: 100px; /* Ajusta este valor */
-    margin: 0 auto; /* Asegura centrado si no usas el container con flex */
-    /* object-fit: contain; */ /* Útil si las imágenes no son cuadradas */
+    /* El icono usará el 100% del espacio disponible dentro del padding */
+    width: 100%; 
+    height: 100%;
+    object-fit: contain; /* Escala manteniendo la proporción */
+    margin: 0 auto; /* No necesario con flex, pero por si acaso */
 }
 
 .feature-content h3 {

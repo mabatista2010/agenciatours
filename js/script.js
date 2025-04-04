@@ -299,8 +299,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // --- Efectos de aparición al hacer scroll (Intersection Observer API) ---
+    const isMobile = () => window.innerWidth < 768; // Definir punto de corte móvil
+    
     // Añadir clase CSS para la animación inicial
     const addScrollStyles = () => {
+        // Solo añade estilos de animación si no es móvil
+        if (isMobile()) return;
+        
         const style = document.createElement('style');
         style.textContent = `
             .fade-in-element {
@@ -323,71 +328,51 @@ document.addEventListener('DOMContentLoaded', function() {
     
     addScrollStyles();
     
-    // Aplicar clases a elementos que queremos animar
+    // Aplicar clases a elementos que queremos animar (solo en desktop)
     const prepareElementsForAnimation = () => {
-        // Para las actividades
-        const activityCards = document.querySelectorAll('.activity-card');
-        activityCards.forEach((card, index) => {
-            card.classList.add('fade-in-element');
-            card.classList.add(`delay-${(index % 4) * 100 + 100}`);
-        });
+        // Solo aplica clases si no es móvil
+        if (isMobile()) return;
         
-        // Para los testimonios
-        const testimonialCards = document.querySelectorAll('.testimonial-card');
-        testimonialCards.forEach((card, index) => {
-            card.classList.add('fade-in-element');
-            card.classList.add(`delay-${(index % 3) * 100 + 100}`);
-        });
-        
-        // Para las características (why choose us)
-        const featureCards = document.querySelectorAll('.feature-card');
-        featureCards.forEach((card, index) => {
-            card.classList.add('fade-in-element');
-            card.classList.add(`delay-${(index % 3) * 100 + 100}`);
-        });
-        
-        // Para la sección CTA
-        const ctaElements = [
-            document.querySelector('.cta-left h2'),
-            document.querySelector('.cta-subtitle'),
-            document.querySelector('.cta-features'),
-            document.querySelector('.cta-offer'),
-            document.querySelector('.cta-buttons'),
-            document.querySelector('.cta-form-container')
-        ];
-        
-        ctaElements.forEach((element, index) => {
-            if (element) {
-                element.classList.add('fade-in-element');
-                element.classList.add(`delay-${index * 100 + 100}`);
-            }
+        // Selector general para todos los elementos a animar
+        const elementsToAnimate = document.querySelectorAll(
+            '.activity-card, .testimonial-card, .feature-card, '
+            + '.cta-left h2, .cta-subtitle, .cta-features, .cta-offer, .cta-buttons, .cta-form-container'
+        );
+
+        elementsToAnimate.forEach((element, index) => {
+            element.classList.add('fade-in-element');
+            // Aplicar delay basado en un grupo o índice general si es más simple
+            const delayClass = `delay-${(index % 5) * 100 + 100}`;
+            element.classList.add(delayClass);
         });
     };
     
     prepareElementsForAnimation();
     
-    // Configurar y activar el Intersection Observer
-    const observerOptions = {
-        root: null, // viewport
-        rootMargin: '0px',
-        threshold: 0.1 // 10% del elemento debe ser visible
-    };
-    
-    const handleIntersection = (entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target); // dejar de observar una vez animado
-            }
+    // Configurar y activar el Intersection Observer (solo en desktop)
+    if (!isMobile()) {
+        const observerOptions = {
+            root: null, // viewport
+            rootMargin: '0px',
+            threshold: 0.1 // 10% del elemento debe ser visible
+        };
+        
+        const handleIntersection = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // dejar de observar una vez animado
+                }
+            });
+        };
+        
+        const observer = new IntersectionObserver(handleIntersection, observerOptions);
+        
+        // Observar todos los elementos con la clase 'fade-in-element'
+        document.querySelectorAll('.fade-in-element').forEach(el => {
+            observer.observe(el);
         });
-    };
-    
-    const observer = new IntersectionObserver(handleIntersection, observerOptions);
-    
-    // Observar todos los elementos con la clase 'fade-in-element'
-    document.querySelectorAll('.fade-in-element').forEach(el => {
-        observer.observe(el);
-    });
+    }
 
     // --- Puedes añadir más funcionalidades aquí ---
     // Ej: Validación de formulario de contacto simple (antes de enviar a backend)
