@@ -183,116 +183,119 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // --- Carrusel de Tours ---
-    const carouselContainer = document.querySelector('.carousel-container');
-    const carouselDots = document.querySelectorAll('.carousel-dot');
-    const prevButton = document.querySelector('.carousel-control.prev');
-    const nextButton = document.querySelector('.carousel-control.next');
-    
-    if (carouselContainer && carouselDots.length > 0 && prevButton && nextButton) {
-        // Solo activamos el carrusel si estamos en móvil/tablet
-        if (window.innerWidth < 992) {
-            const tourCards = document.querySelectorAll('.tour-card');
-            let currentSlide = 0;
-            const maxSlides = tourCards.length;
-            
-            // Función para mover el carrusel
-            function moveCarousel(slideIndex) {
-                if (slideIndex < 0) slideIndex = maxSlides - 1;
-                if (slideIndex >= maxSlides) slideIndex = 0;
-                
-                currentSlide = slideIndex;
-                
-                // Ancho del card + margin derecho
-                const cardWidth = tourCards[0].offsetWidth + 15;
-                carouselContainer.style.transform = `translateX(-${cardWidth * currentSlide}px)`;
-                
-                // Actualizar dots
-                carouselDots.forEach((dot, index) => {
-                    dot.classList.toggle('active', index === currentSlide);
-                });
-            }
-            
-            // Event Listeners para controles
-            prevButton.addEventListener('click', () => {
-                moveCarousel(currentSlide - 1);
-            });
-            
-            nextButton.addEventListener('click', () => {
-                moveCarousel(currentSlide + 1);
-            });
-            
-            // Event Listeners para dots
-            carouselDots.forEach((dot, index) => {
-                dot.addEventListener('click', () => {
-                    moveCarousel(index);
-                });
-            });
-            
-            // Auto-play (opcional)
-            let autoPlayInterval;
-            
-            function startAutoPlay() {
-                autoPlayInterval = setInterval(() => {
-                    moveCarousel(currentSlide + 1);
-                }, 5000); // Cambiar cada 5 segundos
-            }
-            
-            function stopAutoPlay() {
-                clearInterval(autoPlayInterval);
-            }
-            
-            // Iniciar auto-play y detenerlo al interactuar
-            startAutoPlay();
-            
-            // Detener cuando el usuario interactúa
-            prevButton.addEventListener('mouseenter', stopAutoPlay);
-            nextButton.addEventListener('mouseenter', stopAutoPlay);
-            carouselContainer.addEventListener('mouseenter', stopAutoPlay);
-            
-            // Reiniciar cuando el usuario deja de interactuar
-            prevButton.addEventListener('mouseleave', startAutoPlay);
-            nextButton.addEventListener('mouseleave', startAutoPlay);
-            carouselContainer.addEventListener('mouseleave', startAutoPlay);
-            
-            // Manejar eventos táctiles para dispositivos móviles
-            let touchStartX = 0;
-            let touchEndX = 0;
-            
-            carouselContainer.addEventListener('touchstart', (e) => {
-                touchStartX = e.changedTouches[0].screenX;
-                stopAutoPlay();
-            }, { passive: true });
-            
-            carouselContainer.addEventListener('touchend', (e) => {
-                touchEndX = e.changedTouches[0].screenX;
-                handleSwipe();
-                startAutoPlay();
-            }, { passive: true });
-            
-            function handleSwipe() {
-                const swipeThreshold = 50; // mínima distancia para considerar un swipe
-                if (touchEndX < touchStartX - swipeThreshold) {
-                    // Swipe a la izquierda
-                    moveCarousel(currentSlide + 1);
-                } else if (touchEndX > touchStartX + swipeThreshold) {
-                    // Swipe a la derecha
-                    moveCarousel(currentSlide - 1);
+    // --- Carrusel de Tours --- Refinado
+    const carousel = document.querySelector('.tour-carousel');
+
+    if (carousel) {
+        const carouselContainer = carousel.querySelector('.carousel-container');
+        const carouselDotsContainer = carousel.querySelector('.carousel-dots');
+        const prevButton = carousel.querySelector('.carousel-control.prev');
+        const nextButton = carousel.querySelector('.carousel-control.next');
+        let tourCards = [];
+        let carouselDots = [];
+        let currentSlide = 0;
+        let maxSlides = 0;
+        let isDesktop = window.innerWidth >= 992;
+
+        function setupCarousel() {
+            isDesktop = window.innerWidth >= 992;
+            tourCards = Array.from(carouselContainer.querySelectorAll('.tour-card'));
+            maxSlides = tourCards.length;
+
+            if (isDesktop) {
+                // En escritorio, ocultamos controles y dots si están visibles
+                if (prevButton) prevButton.style.display = 'none';
+                if (nextButton) nextButton.style.display = 'none';
+                if (carouselDotsContainer) carouselDotsContainer.style.display = 'none';
+                carouselContainer.style.transform = ''; // Reset transform
+                carouselContainer.classList.remove('scrolling');
+            } else {
+                // En móvil/tablet
+                if (prevButton) prevButton.style.display = 'flex';
+                if (nextButton) nextButton.style.display = 'flex';
+                if (carouselDotsContainer) {
+                     carouselDotsContainer.style.display = 'flex';
+                     setupDots();
                 }
+                updateCarouselUI();
+                carouselContainer.classList.add('scrolling');
             }
-        } else {
-            // En desktop, ocultamos los controles de navegación
-            document.querySelector('.carousel-controls').style.display = 'none';
         }
         
-        // Ajustar al cambiar tamaño de ventana
-        window.addEventListener('resize', () => {
-            if (window.innerWidth < 992) {
-                document.querySelector('.carousel-controls').style.display = 'flex';
-            } else {
-                document.querySelector('.carousel-controls').style.display = 'none';
+        function setupDots() {
+            if (!carouselDotsContainer) return;
+            carouselDotsContainer.innerHTML = ''; // Limpiar dots existentes
+            carouselDots = [];
+            for (let i = 0; i < maxSlides; i++) {
+                const dot = document.createElement('span');
+                dot.classList.add('carousel-dot');
+                dot.addEventListener('click', () => {
+                    goToSlide(i);
+                });
+                carouselDotsContainer.appendChild(dot);
+                carouselDots.push(dot);
             }
-        });
+            updateDots();
+        }
+
+        function updateDots() {
+            if (!carouselDotsContainer || isDesktop) return;
+            carouselDots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+        
+        function updateCarouselUI() {
+            if (isDesktop) return;
+            // Calculamos el desplazamiento usando scrollLeft para mayor precisión con scroll-snap
+            const scrollAmount = currentSlide * carouselContainer.offsetWidth;
+            carouselContainer.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+            updateDots();
+        }
+
+        function goToSlide(slideIndex) {
+            if (isDesktop) return;
+            
+            currentSlide = (slideIndex + maxSlides) % maxSlides; // Asegura índice válido
+            updateCarouselUI();
+        }
+
+        // Event Listeners para botones
+        if (prevButton) {
+            prevButton.addEventListener('click', () => {
+                goToSlide(currentSlide - 1);
+            });
+        }
+        if (nextButton) {
+            nextButton.addEventListener('click', () => {
+                goToSlide(currentSlide + 1);
+            });
+        }
+
+        // Actualizar índice al hacer scroll manual (para sincronizar dots)
+        let scrollTimeout;
+        if (carouselContainer) {
+            carouselContainer.addEventListener('scroll', () => {
+                if (isDesktop) return;
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    const scrollLeft = carouselContainer.scrollLeft;
+                    const containerWidth = carouselContainer.offsetWidth;
+                    // Estimamos el índice basado en la posición de scroll
+                    const newSlideIndex = Math.round(scrollLeft / containerWidth);
+                    if (newSlideIndex !== currentSlide) {
+                         currentSlide = (newSlideIndex + maxSlides) % maxSlides; // Asegura índice válido
+                         updateDots();
+                    }
+                }, 150); // Espera un poco después de que el scroll termine
+            }, { passive: true });
+        }
+
+        // Reconfigurar en resize
+        window.addEventListener('resize', setupCarousel);
+
+        // Configuración inicial
+        setupCarousel();
     }
 
     // --- Efectos de aparición al hacer scroll (Intersection Observer API) ---

@@ -149,27 +149,27 @@ img {
     left: 0;
     width: 100%;
     z-index: 1000;
-    transition: all 0.4s ease;
+    transition: background-color 0.4s ease, box-shadow 0.4s ease, padding 0.4s ease;
     height: auto;
+    background-color: transparent; /* Empieza transparente */
+    box-shadow: none;
+    padding: 15px 0; /* Padding inicial */
 }
 
 .main-header.scrolled {
-    background-color: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff; /* Blanco sólido al hacer scroll */
+    /* backdrop-filter: blur(10px); */ /* Quitamos el blur */
+    /* -webkit-backdrop-filter: blur(10px); */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08); /* Sombra más sutil */
+    padding: 10px 0; /* Padding reducido al hacer scroll */
 }
 
 .navbar {
+    /* No necesita padding aquí, se controla en .main-header */
     display: flex;
     align-items: center;
-    padding: 15px 0;
     transition: all 0.3s ease;
     height: auto;
-}
-
-.main-header.scrolled .navbar {
-    padding: 10px 0;
 }
 
 .navbar .container {
@@ -219,7 +219,7 @@ img {
 }
 
 .navbar-menu a {
-    color: var(--dark-color);
+    color: #fff; /* Color inicial blanco */
     font-weight: 500;
     padding: 8px 16px;
     border-radius: 6px;
@@ -231,6 +231,7 @@ img {
     text-transform: uppercase;
     font-size: 0.9rem;
     letter-spacing: 0.5px;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3); /* Sombra para legibilidad */
 }
 
 .navbar-menu a span {
@@ -246,7 +247,7 @@ img {
     width: 100%;
     height: 0;
     background-color: var(--primary-color);
-    opacity: 0.1;
+    opacity: 0.1; /* Mantenemos opacidad baja */
     border-radius: 6px;
     transition: height 0.3s ease;
     z-index: 1;
@@ -265,9 +266,13 @@ img {
     transform: translateX(-50%);
     width: 0;
     height: 2px;
-    background-color: var(--primary-color);
-    transition: width 0.3s ease;
+    background-color: #fff; /* Línea blanca inicialmente */
+    transition: width 0.3s ease, background-color 0.3s ease;
     z-index: 2;
+}
+
+.main-header.scrolled .navbar-menu a::after {
+    background-color: var(--primary-color); /* Línea azul al hacer scroll */
 }
 
 .navbar-menu a:hover::after,
@@ -276,8 +281,11 @@ img {
 }
 
 .navbar-menu a.active {
-    color: var(--primary-color);
+    color: #fff; /* Blanco si está activo y no hay scroll */
     font-weight: 600;
+}
+.main-header.scrolled .navbar-menu a.active {
+    color: var(--primary-color); /* Azul si está activo y hay scroll */
 }
 
 .navbar-actions {
@@ -287,7 +295,10 @@ img {
 }
 
 .btn-navbar {
-    background-color: var(--primary-color);
+    /* Mantenemos el diseño, podría necesitar ajustes si el contraste no es bueno al inicio */
+    /* Quizás un borde blanco inicial */
+    border: 2px solid #fff;
+    background-color: transparent;
     color: white;
     padding: 8px 20px;
     border-radius: 24px;
@@ -297,7 +308,12 @@ img {
     text-transform: uppercase;
     box-shadow: 0 4px 15px rgba(0, 119, 204, 0.25);
     transition: all 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.main-header.scrolled .btn-navbar {
     border: 2px solid transparent;
+    background-color: var(--primary-color);
 }
 
 .btn-navbar:hover {
@@ -315,14 +331,19 @@ img {
 }
 
 .nav-social-link {
+    /* Hacemos el fondo inicial blanco para contraste */
+    background-color: rgba(255, 255, 255, 0.8);
     display: flex;
     align-items: center;
     justify-content: center;
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background-color: rgba(var(--primary-color-rgb), 0.1);
     transition: all 0.3s ease;
+}
+
+.main-header.scrolled .nav-social-link {
+     background-color: rgba(var(--primary-color-rgb), 0.1);
 }
 
 .nav-social-link:hover {
@@ -357,10 +378,16 @@ img {
     display: block;
     width: 25px;
     height: 2px;
-    background-color: var(--dark-color);
+    background-color: #fff; /* Blanco inicialmente */
     margin: 5px 0;
     transition: transform 0.3s ease, opacity 0.3s ease;
     border-radius: 2px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.main-header.scrolled .navbar-toggler span {
+    background-color: var(--dark-color);
+    box-shadow: none;
 }
 
 .navbar-toggler.active span:nth-child(1) {
@@ -501,13 +528,12 @@ img {
 
 /* Ajuste para el contenido principal para no quedar debajo del navbar */
 main {
-    padding-top: var(--navbar-height);
+    padding-top: 80px; /* Un valor fijo o calculado basado en altura inicial */
 }
 
 /* Hacemos que el hero ocupe toda la pantalla visible sin el navbar */
 .hero {
-    margin-top: calc(-1 * var(--navbar-height));
-    height: 100vh; /* Altura completa de la ventana */
+    height: 100vh;
 }
 
 /* --- Hero Section (Mobile First) --- */
@@ -516,7 +542,7 @@ main {
     background: url('../images/hero-mobile-bg.jpg') no-repeat center center/cover;
 
     /* Ajustes de altura para móvil */
-    height: calc(85vh - var(--navbar-height)); /* Altura ajustada para móvil */
+    height: calc(100vh - 70px); /* Ajustar altura hero en móvil */
     min-height: 450px; /* Altura mínima para evitar que sea muy pequeño */
 
     /* Estilos generales del Hero */
@@ -1781,74 +1807,58 @@ main {
         gap: 30px; /* Aumentar espacio entre tarjetas de contacto */
         margin-bottom: 60px;
     }
-    
-    .contact-method-item {
+     .contact-method-item {
         padding: 30px 20px; /* Más padding vertical */
     }
-    
-    .contact-method-icon {
+     .contact-method-icon {
         margin-bottom: 20px; /* Más separación entre icono y texto */
     }
-    
-    .form-row {
+     .form-row {
         flex-direction: column;
         gap: 0;
     }
-    
-    .section-padding {
+     .section-padding {
         padding: 50px 0; /* Más espacio entre secciones */
     }
-    
-    .section-title {
+     .section-title {
         margin-bottom: 50px; /* Más espacio después del título */
     }
-    
-    .contact-form-container,
+     .contact-form-container,
     .map-container {
         padding: 35px 25px; /* Más padding interno */
         margin-bottom: 40px; /* Espacio entre contenedores */
     }
-    
-    .contact-form-container h2,
+     .contact-form-container h2,
     .map-container h2 {
         margin-bottom: 20px; /* Más espacio bajo títulos */
     }
-    
-    .form-group {
+     .form-group {
         margin-bottom: 30px; /* Más espacio entre grupos de formulario */
     }
-    
-    .contact-hero h1 {
+     .contact-hero h1 {
         font-size: 2rem;
         margin-bottom: 1.5rem; /* Más espacio bajo título hero */
     }
-    
-    .contact-hero p {
+     .contact-hero p {
         font-size: 1rem;
     }
-    
-    .cta-buttons {
+     .cta-buttons {
         flex-direction: column;
         gap: 20px; /* Más espacio entre botones */
     }
-    
-    .faq-item {
+     .faq-item {
         margin-bottom: 25px; /* Más espacio entre preguntas */
     }
-    
-    .map-responsive {
+     .map-responsive {
         margin-bottom: 40px; /* Espacio después del mapa */
     }
-    
-    .visit-info {
+     .visit-info {
         gap: 30px; /* Más espacio en info de visita */
     }
-    
-    .visit-info-item {
+     .visit-info-item {
         padding: 25px; /* Más padding en items de info */
     }
-    
-    .cta.section-padding {
+     .cta.section-padding {
         padding: 60px 0; /* Más espacio en CTA */
     }
 }
@@ -1958,14 +1968,23 @@ main {
         display: flex;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
+        -webkit-overflow-scrolling: touch; /* Para iOS */
         scroll-behavior: smooth;
-        padding-bottom: 15px;
+        padding-bottom: 15px; /* Espacio para scrollbar si aparece */
+        /* Quitar el transition que interfiere con el scroll */
+        /* transition: transform 0.5s ease; */
+        scrollbar-width: none; /* Ocultar scrollbar en Firefox */
+    }
+    .carousel-container::-webkit-scrollbar { /* Ocultar scrollbar en Chrome/Safari */
+        display: none;
     }
      .tour-card {
-        flex: 0 0 85%;
+        flex: 0 0 85%; /* Ocupa 85% del ancho del contenedor */
         margin-right: 15px;
-        scroll-snap-align: center;
+        scroll-snap-align: center; /* Centra el elemento al hacer scroll snap */
+    }
+    .tour-card:last-child {
+        margin-right: 0; /* Quita margen al último elemento */
     }
 }
 
