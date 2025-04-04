@@ -115,38 +115,140 @@
         <section class="featured-tours section-padding">
             <div class="container">
                 <h2 class="section-title">Nuestras Excursiones Destacadas</h2>
-                <div class="tours-grid">
-                    <!-- Tour Card 1 -->
-                    <div class="tour-card">
-                        <img src="images/tour-limon-featured.webp" alt="Cascada El Limón" class="tour-card-img">
-                        <div class="tour-card-content">
-                            <h3>Cascada El Limón</h3>
-                            <p>Una aventura a caballo o a pie hacia una espectacular cascada en medio de la selva tropical.</p>
-                            <a href="tour-el-limon.html" class="btn btn-secondary">Más Detalles</a>
+                
+                <!-- Carrusel de Tours -->
+                <div class="tour-carousel">
+                    <div class="carousel-container">
+                        <!-- Tour Card 1 -->
+                        <div class="tour-card">
+                            <div class="tour-card-image">
+                                <img src="images/tour-limon-featured.webp" alt="Cascada El Limón" class="tour-card-img">
+                                <div class="tour-card-badge">Popular</div>
+                            </div>
+                            <div class="tour-card-content">
+                                <div class="tour-card-icons">
+                                    <div class="tour-icon"><img src="images/icon-clock.svg" alt="Duración"> 5-6 horas</div>
+                                    <div class="tour-icon"><img src="images/icon-horse.svg" alt="Actividad"> Caballo</div>
+                                </div>
+                                <h3>Cascada El Limón</h3>
+                                <p>Una aventura a caballo o a pie hacia una espectacular cascada en medio de la selva tropical.</p>
+                                <div class="tour-card-footer">
+                                    <span class="tour-price">Desde $45/persona</span>
+                                    <a href="tour-el-limon.html" class="btn btn-secondary">Más Detalles</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Tour Card 2 -->
+                        <div class="tour-card">
+                            <div class="tour-card-image">
+                                <img src="images/tour-haitises-featured.webp" alt="Parque Nacional Los Haitises" class="tour-card-img">
+                                <div class="tour-card-badge">Top</div>
+                            </div>
+                            <div class="tour-card-content">
+                                <div class="tour-card-icons">
+                                    <div class="tour-icon"><img src="images/icon-clock.svg" alt="Duración"> 7-8 horas</div>
+                                    <div class="tour-icon"><img src="images/icon-water.svg" alt="Actividad"> Bote</div>
+                                </div>
+                                <h3>Parque Nacional Los Haitises</h3>
+                                <p>Navega entre manglares, explora cuevas con arte taíno y observa aves exóticas.</p>
+                                <div class="tour-card-footer">
+                                    <span class="tour-price">Desde $85/persona</span>
+                                    <a href="tour-los-haitises.html" class="btn btn-secondary">Más Detalles</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Tour Card 3 -->
+                        <div class="tour-card">
+                            <div class="tour-card-image">
+                                <img src="images/tour-rincon-featured.webp" alt="Playa Rincón" class="tour-card-img">
+                                <div class="tour-card-badge">Favorito</div>
+                            </div>
+                            <div class="tour-card-content">
+                                <div class="tour-card-icons">
+                                    <div class="tour-icon"><img src="images/icon-clock.svg" alt="Duración"> 6-7 horas</div>
+                                    <div class="tour-icon"><img src="images/icon-transport.svg" alt="Actividad"> Barco</div>
+                                </div>
+                                <h3>Playa Rincón & Frontón</h3>
+                                <p>Descubre una de las playas más hermosas del mundo y disfruta de snorkeling en Frontón.</p>
+                                <div class="tour-card-footer">
+                                    <span class="tour-price">Desde $65/persona</span>
+                                    <a href="tour-playa-rincon.html" class="btn btn-secondary">Más Detalles</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <!-- Tour Card 2 -->
-                    <div class="tour-card">
-                        <img src="images/tour-haitises-featured.webp" alt="Parque Nacional Los Haitises" class="tour-card-img">
-                        <div class="tour-card-content">
-                            <h3>Parque Nacional Los Haitises</h3>
-                            <p>Navega entre manglares, explora cuevas con arte taíno y observa aves exóticas.</p>
-                            <a href="tour-los-haitises.html" class="btn btn-secondary">Más Detalles</a>
+                    <div class="carousel-controls">
+                        <button class="carousel-control prev" aria-label="Anterior"><span>&laquo;</span></button>
+                        <div class="carousel-dots">
+                            <span class="carousel-dot active"></span>
+                            <span class="carousel-dot"></span>
+                            <span class="carousel-dot"></span>
+                        </div>
+                        <button class="carousel-control next" aria-label="Siguiente"><span>&raquo;</span></button>
+                    </div>
+                </div>
+                
+                <div class="text-center" style="margin-top: 40px;">
+                    <a href="tours.html" class="btn btn-primary">Ver Todos los Tours</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Actividades Destacadas -->
+        <section class="activities section-padding bg-light">
+            <div class="container">
+                <h2 class="section-title">Actividades Destacadas</h2>
+                <p class="section-description text-center">Descubre experiencias únicas que podrás disfrutar durante tus excursiones.</p>
+                
+                <div class="activities-grid">
+                    <!-- Actividad 1 -->
+                    <div class="activity-card">
+                        <div class="activity-icon">
+                            <img src="images/icon-horse.svg" alt="Paseos a caballo">
+                        </div>
+                        <h3>Paseos a Caballo</h3>
+                        <p>Recorre hermosos senderos a lomo de caballo hasta llegar a destinos impresionantes como la Cascada El Limón.</p>
+                        <div class="activity-hover">
+                            <a href="tour-el-limon.html" class="btn btn-secondary btn-sm">Ver Tour</a>
                         </div>
                     </div>
-                    <!-- Tour Card 3 -->
-                    <div class="tour-card">
-                        <img src="images/tour-rincon-featured.webp" alt="Playa Rincón" class="tour-card-img">
-                        <div class="tour-card-content">
-                            <h3>Playa Rincón & Frontón</h3>
-                            <p>Descubre una de las playas más hermosas del mundo y disfruta de snorkeling en Frontón.</p>
-                            <a href="tour-playa-rincon.html" class="btn btn-secondary">Más Detalles</a>
+                    
+                    <!-- Actividad 2 -->
+                    <div class="activity-card">
+                        <div class="activity-icon">
+                            <img src="images/icon-water.svg" alt="Snorkeling">
+                        </div>
+                        <h3>Snorkeling</h3>
+                        <p>Sumérgete en las cristalinas aguas de Playa Frontón y descubre un mundo submarino lleno de coloridos peces y arrecifes.</p>
+                        <div class="activity-hover">
+                            <a href="tour-playa-rincon.html" class="btn btn-secondary btn-sm">Ver Tour</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Actividad 3 -->
+                    <div class="activity-card">
+                        <div class="activity-icon">
+                            <img src="images/icon-transport.svg" alt="Paseos en bote">
+                        </div>
+                        <h3>Paseos en Bote</h3>
+                        <p>Navega entre los imponentes mogotes del Parque Nacional Los Haitises y explora sus místicas cuevas.</p>
+                        <div class="activity-hover">
+                            <a href="tour-los-haitises.html" class="btn btn-secondary btn-sm">Ver Tour</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Actividad 4 -->
+                    <div class="activity-card">
+                        <div class="activity-icon">
+                            <img src="images/icon-food.svg" alt="Gastronomía Local">
+                        </div>
+                        <h3>Gastronomía Local</h3>
+                        <p>Degusta platos típicos dominicanos preparados con productos frescos locales durante tus excursiones.</p>
+                        <div class="activity-hover">
+                            <a href="tours.html" class="btn btn-secondary btn-sm">Ver Tours</a>
                         </div>
                     </div>
                 </div>
-                 <div class="text-center" style="margin-top: 30px;">
-                     <a href="tours.html" class="btn btn-primary">Ver Todos los Tours</a>
-                 </div>
             </div>
         </section>
 
@@ -189,6 +291,72 @@
                         </div>
                     </div>
 
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials section-padding">
+            <div class="container">
+                <h2 class="section-title">Lo Que Dicen Nuestros Clientes</h2>
+                <div class="testimonial-carousel">
+                    <!-- Testimonio 1 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                        <blockquote>
+                            "¡Excursión increíble a la Cascada El Limón! Nuestro guía Miguel era muy conocedor de la zona y nos hizo sentir como en casa. La cascada es espectacular y la experiencia a caballo fue muy divertida. ¡Altamente recomendable!"
+                        </blockquote>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <p class="author-name">Laura Martínez</p>
+                                <p class="author-origin">Madrid, España</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Testimonio 2 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                        <blockquote>
+                            "El tour a Los Haitises fue espectacular. Pudimos ver las cuevas con arte taíno, navegar entre los manglares y observar muchas aves. El almuerzo fue delicioso con auténtica comida dominicana. La organización fue perfecta de principio a fin."
+                        </blockquote>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <p class="author-name">Robert Johnson</p>
+                                <p class="author-origin">New York, USA</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Testimonio 3 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                        <blockquote>
+                            "Playa Rincón es sin duda una de las mejores playas que he visitado. El agua cristalina, la arena blanca y el ambiente tranquilo lo hacen perfecto. El tour incluyó un delicioso almuerzo y tiempo suficiente para relajarse. ¡Volveré seguro!"
+                        </blockquote>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <p class="author-name">Sophie Dubois</p>
+                                <p class="author-origin">París, Francia</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

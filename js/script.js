@@ -90,6 +90,191 @@ document.addEventListener('DOMContentLoaded', function() {
         subjectInput.value = `Consulta sobre el tour: ${tourSubject}`;
     }
 
+    // --- Carrusel de Tours ---
+    const carouselContainer = document.querySelector('.carousel-container');
+    const carouselDots = document.querySelectorAll('.carousel-dot');
+    const prevButton = document.querySelector('.carousel-control.prev');
+    const nextButton = document.querySelector('.carousel-control.next');
+    
+    if (carouselContainer && carouselDots.length > 0 && prevButton && nextButton) {
+        // Solo activamos el carrusel si estamos en móvil/tablet
+        if (window.innerWidth < 992) {
+            const tourCards = document.querySelectorAll('.tour-card');
+            let currentSlide = 0;
+            const maxSlides = tourCards.length;
+            
+            // Función para mover el carrusel
+            function moveCarousel(slideIndex) {
+                if (slideIndex < 0) slideIndex = maxSlides - 1;
+                if (slideIndex >= maxSlides) slideIndex = 0;
+                
+                currentSlide = slideIndex;
+                
+                // Ancho del card + margin derecho
+                const cardWidth = tourCards[0].offsetWidth + 15;
+                carouselContainer.style.transform = `translateX(-${cardWidth * currentSlide}px)`;
+                
+                // Actualizar dots
+                carouselDots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentSlide);
+                });
+            }
+            
+            // Event Listeners para controles
+            prevButton.addEventListener('click', () => {
+                moveCarousel(currentSlide - 1);
+            });
+            
+            nextButton.addEventListener('click', () => {
+                moveCarousel(currentSlide + 1);
+            });
+            
+            // Event Listeners para dots
+            carouselDots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    moveCarousel(index);
+                });
+            });
+            
+            // Auto-play (opcional)
+            let autoPlayInterval;
+            
+            function startAutoPlay() {
+                autoPlayInterval = setInterval(() => {
+                    moveCarousel(currentSlide + 1);
+                }, 5000); // Cambiar cada 5 segundos
+            }
+            
+            function stopAutoPlay() {
+                clearInterval(autoPlayInterval);
+            }
+            
+            // Iniciar auto-play y detenerlo al interactuar
+            startAutoPlay();
+            
+            // Detener cuando el usuario interactúa
+            prevButton.addEventListener('mouseenter', stopAutoPlay);
+            nextButton.addEventListener('mouseenter', stopAutoPlay);
+            carouselContainer.addEventListener('mouseenter', stopAutoPlay);
+            
+            // Reiniciar cuando el usuario deja de interactuar
+            prevButton.addEventListener('mouseleave', startAutoPlay);
+            nextButton.addEventListener('mouseleave', startAutoPlay);
+            carouselContainer.addEventListener('mouseleave', startAutoPlay);
+            
+            // Manejar eventos táctiles para dispositivos móviles
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            carouselContainer.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+                stopAutoPlay();
+            }, { passive: true });
+            
+            carouselContainer.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+                startAutoPlay();
+            }, { passive: true });
+            
+            function handleSwipe() {
+                const swipeThreshold = 50; // mínima distancia para considerar un swipe
+                if (touchEndX < touchStartX - swipeThreshold) {
+                    // Swipe a la izquierda
+                    moveCarousel(currentSlide + 1);
+                } else if (touchEndX > touchStartX + swipeThreshold) {
+                    // Swipe a la derecha
+                    moveCarousel(currentSlide - 1);
+                }
+            }
+        } else {
+            // En desktop, ocultamos los controles de navegación
+            document.querySelector('.carousel-controls').style.display = 'none';
+        }
+        
+        // Ajustar al cambiar tamaño de ventana
+        window.addEventListener('resize', () => {
+            if (window.innerWidth < 992) {
+                document.querySelector('.carousel-controls').style.display = 'flex';
+            } else {
+                document.querySelector('.carousel-controls').style.display = 'none';
+            }
+        });
+    }
+
+    // --- Efectos de aparición al hacer scroll (Intersection Observer API) ---
+    // Añadir clase CSS para la animación inicial
+    const addScrollStyles = () => {
+        const style = document.createElement('style');
+        style.textContent = `
+            .fade-in-element {
+                opacity: 0;
+                transform: translateY(30px);
+                transition: opacity 0.8s ease, transform 0.8s ease;
+            }
+            .fade-in-element.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            .delay-100 { transition-delay: 0.1s; }
+            .delay-200 { transition-delay: 0.2s; }
+            .delay-300 { transition-delay: 0.3s; }
+            .delay-400 { transition-delay: 0.4s; }
+            .delay-500 { transition-delay: 0.5s; }
+        `;
+        document.head.appendChild(style);
+    };
+    
+    addScrollStyles();
+    
+    // Aplicar clases a elementos que queremos animar
+    const prepareElementsForAnimation = () => {
+        // Para las actividades
+        const activityCards = document.querySelectorAll('.activity-card');
+        activityCards.forEach((card, index) => {
+            card.classList.add('fade-in-element');
+            card.classList.add(`delay-${(index % 4) * 100 + 100}`);
+        });
+        
+        // Para los testimonios
+        const testimonialCards = document.querySelectorAll('.testimonial-card');
+        testimonialCards.forEach((card, index) => {
+            card.classList.add('fade-in-element');
+            card.classList.add(`delay-${(index % 3) * 100 + 100}`);
+        });
+        
+        // Para las características (why choose us)
+        const featureCards = document.querySelectorAll('.feature-card');
+        featureCards.forEach((card, index) => {
+            card.classList.add('fade-in-element');
+            card.classList.add(`delay-${(index % 3) * 100 + 100}`);
+        });
+    };
+    
+    prepareElementsForAnimation();
+    
+    // Configurar y activar el Intersection Observer
+    const observerOptions = {
+        root: null, // viewport
+        rootMargin: '0px',
+        threshold: 0.1 // 10% del elemento debe ser visible
+    };
+    
+    const handleIntersection = (entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target); // dejar de observar una vez animado
+            }
+        });
+    };
+    
+    const observer = new IntersectionObserver(handleIntersection, observerOptions);
+    
+    // Observar todos los elementos con la clase 'fade-in-element'
+    document.querySelectorAll('.fade-in-element').forEach(el => {
+        observer.observe(el);
+    });
 
     // --- Puedes añadir más funcionalidades aquí ---
     // Ej: Validación de formulario de contacto simple (antes de enviar a backend)
