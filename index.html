@@ -1,16 +1,246 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>replit</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Descubre las mejores excursiones y tours en Las Terrenas, Samaná, República Dominicana. Aventura, playas y naturaleza te esperan.">
+    
+    <!-- Metaetiquetas para SEO -->
+    <meta name="keywords" content="tours, excursiones, Las Terrenas, Samaná, República Dominicana, Cascada El Limón, Los Haitises, Playa Rincón">
+    <meta name="author" content="Tu Agencia Tours">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://tuagenciatours.com/index.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tuagenciatours.com/">
+    <meta property="og:title" content="Tu Agencia Tours - Las Terrenas, RD">
+    <meta property="og:description" content="Descubre las mejores excursiones y tours en Las Terrenas, Samaná, República Dominicana. Aventura, playas y naturaleza te esperan.">
+    <meta property="og:image" content="https://tuagenciatours.com/images/hero-bg.webp">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:site_name" content="Tu Agencia Tours">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://tuagenciatours.com/">
+    <meta name="twitter:title" content="Tu Agencia Tours - Las Terrenas, RD">
+    <meta name="twitter:description" content="Descubre las mejores excursiones y tours en Las Terrenas, Samaná, República Dominicana. Aventura, playas y naturaleza te esperan.">
+    <meta name="twitter:image" content="https://tuagenciatours.com/images/hero-bg.webp">
+    
+    <title>Tu Agencia Tours - Las Terrenas, RD</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Favicon -->
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Structured Data / Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TravelAgency",
+        "name": "Tu Agencia Tours",
+        "url": "https://tuagenciatours.com",
+        "logo": "https://tuagenciatours.com/images/logo.png",
+        "description": "Agencia de tours y excursiones en Las Terrenas, Samaná, República Dominicana",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Calle Principal #123",
+            "addressLocality": "Las Terrenas",
+            "addressRegion": "Samaná",
+            "addressCountry": "República Dominicana"
+        },
+        "telephone": "+18091234567",
+        "email": "info@tuagenciatours.com",
+        "openingHours": "Mo-Sa 08:00-18:00, Su 09:00-14:00",
+        "potentialAction": {
+            "@type": "ReserveAction",
+            "target": {
+                "@type": "EntryPoint",
+                "urlTemplate": "https://tuagenciatours.com/contact.html",
+                "inLanguage": "es",
+                "actionPlatform": [
+                    "http://schema.org/DesktopWebPlatform",
+                    "http://schema.org/MobileWebPlatform"
+                ]
+            },
+            "result": {
+                "@type": "Reservation",
+                "name": "Reserva de Excursión"
+            }
+        },
+        "sameAs": [
+            "https://www.facebook.com/tuagenciatours",
+            "https://www.instagram.com/tuagenciatours",
+            "https://wa.me/18091234567"
+        ]
+    }
+    </script>
 </head>
-
 <body>
-  Hello world
-  <script src="script.js"></script>
-</body>
 
+    <header class="main-header">
+        <nav class="navbar">
+            <div class="container">
+                <a href="index.html" class="navbar-logo">
+                    <img src="images/logo.png" alt="Logo Tu Agencia Tours" height="50">
+                    <!-- O usa texto: <span>Tu Agencia Tours</span> -->
+                </a>
+                <button class="navbar-toggler" aria-label="Toggle navigation">☰</button> <!-- Hamburger Icon -->
+                <ul class="navbar-menu">
+                    <li><a href="index.html" class="active">Inicio</a></li>
+                    <li><a href="tours.html">Tours</a></li>
+                    <li><a href="about.html">Sobre Nosotros</a></li>
+                    <li><a href="contact.html">Contacto</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Explora el Paraíso de Las Terrenas</h1>
+                <p>Aventuras inolvidables, playas vírgenes y cultura vibrante te esperan. ¡Reserva tu excursión hoy!</p>
+                <a href="tours.html" class="btn btn-primary">Ver Todos los Tours</a>
+            </div>
+        </section>
+
+        <!-- Featured Tours Section -->
+        <section class="featured-tours section-padding">
+            <div class="container">
+                <h2 class="section-title">Nuestras Excursiones Destacadas</h2>
+                <div class="tours-grid">
+                    <!-- Tour Card 1 -->
+                    <div class="tour-card">
+                        <img src="images/tour-limon-featured.webp" alt="Cascada El Limón" class="tour-card-img">
+                        <div class="tour-card-content">
+                            <h3>Cascada El Limón</h3>
+                            <p>Una aventura a caballo o a pie hacia una espectacular cascada en medio de la selva tropical.</p>
+                            <a href="tour-el-limon.html" class="btn btn-secondary">Más Detalles</a>
+                        </div>
+                    </div>
+                    <!-- Tour Card 2 -->
+                    <div class="tour-card">
+                        <img src="images/tour-haitises-featured.webp" alt="Parque Nacional Los Haitises" class="tour-card-img">
+                        <div class="tour-card-content">
+                            <h3>Parque Nacional Los Haitises</h3>
+                            <p>Navega entre manglares, explora cuevas con arte taíno y observa aves exóticas.</p>
+                            <a href="tour-los-haitises.html" class="btn btn-secondary">Más Detalles</a>
+                        </div>
+                    </div>
+                    <!-- Tour Card 3 -->
+                    <div class="tour-card">
+                        <img src="images/tour-rincon-featured.webp" alt="Playa Rincón" class="tour-card-img">
+                        <div class="tour-card-content">
+                            <h3>Playa Rincón & Frontón</h3>
+                            <p>Descubre una de las playas más hermosas del mundo y disfruta de snorkeling en Frontón.</p>
+                            <a href="tour-playa-rincon.html" class="btn btn-secondary">Más Detalles</a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="text-center" style="margin-top: 30px;">
+                     <a href="tours.html" class="btn btn-primary">Ver Todos los Tours</a>
+                 </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us Section -->
+        <section class="why-choose-us section-padding bg-light">
+            <div class="container">
+                <h2 class="section-title">¿Por Qué Elegirnos?</h2>
+                <div class="features-grid">
+
+                    <!-- Feature Card 1 -->
+                    <div class="feature-card">
+                        <div class="feature-icon-container">
+                            <img src="images/icon-guide-large.png" alt="Guías Locales Expertos" class="feature-icon">
+                            </div>
+                        <div class="feature-content">
+                            <h3>Guías Locales Expertos</h3>
+                            <p>Nuestros guías conocen cada rincón y te mostrarán la auténtica cultura dominicana.</p>
+                        </div>
+                    </div>
+
+                    <!-- Feature Card 2 -->
+                    <div class="feature-card">
+                         <div class="feature-icon-container">
+                            <img src="images/icon-guide.png" alt="Experiencias Únicas" class="feature-icon">
+                         </div>
+                         <div class="feature-content">
+                            <h3>Experiencias Únicas</h3>
+                            <p>Diseñamos tours que van más allá de lo turístico, ofreciendo momentos inolvidables.</p>
+                         </div>
+                    </div>
+
+                    <!-- Feature Card 3 -->
+                    <div class="feature-card">
+                        <div class="feature-icon-container">
+                            <img src="images/icon-food.png" alt="Compromiso y Seguridad" class="feature-icon">
+                         </div>
+                        <div class="feature-content">
+                            <h3>Compromiso y Seguridad</h3>
+                            <p>Tu seguridad y satisfacción son nuestra prioridad. Operamos con los más altos estándares.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+         <!-- Call to Action Section -->
+         <section class="cta section-padding">
+            <div class="container text-center">
+                <h2>¿Listo para tu Aventura en Las Terrenas?</h2>
+                <p>Contáctanos para personalizar tu viaje o reserva directamente una de nuestras emocionantes excursiones.</p>
+                <a href="contact.html" class="btn btn-primary">Contáctanos Ahora</a>
+                <a href="tours.html" class="btn btn-secondary" style="margin-left: 15px;">Ver Tours</a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section about">
+                    <img src="images/logo.png" alt="Logo Tu Agencia Tours" height="40" style="margin-bottom: 10px;">
+                    <p>Tu agencia de confianza para descubrir las maravillas de Las Terrenas y la península de Samaná.</p>
+                    <div class="social-links">
+                        <a href="#" target="_blank" aria-label="Facebook"><img src="images/icon-facebook.svg" alt="Facebook"></a>
+                        <a href="#" target="_blank" aria-label="Instagram"><img src="images/icon-instagram.svg" alt="Instagram"></a>
+                        <a href="#" target="_blank" aria-label="WhatsApp"><img src="images/icon-whatsapp.svg" alt="WhatsApp"></a>
+                    </div>
+                </div>
+                <div class="footer-section links">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="tours.html">Tours</a></li>
+                        <li><a href="about.html">Sobre Nosotros</a></li>
+                        <li><a href="contact.html">Contacto</a></li>
+                        <li><a href="#">Política de Privacidad</a></li>
+                        <li><a href="#">Términos y Condiciones</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section contact-info">
+                    <h3>Contacto</h3>
+                    <p><img src="images/icon-pin.svg" alt="Dirección" class="contact-icon"> Calle Principal #123, Las Terrenas, Samaná, RD</p>
+                    <p><img src="images/icon-phone.svg" alt="Teléfono" class="contact-icon"> +1 (809) 123-4567</p>
+                    <p><img src="images/icon-email.svg" alt="Email" class="contact-icon"> info@tuagenciatours.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© <span id="current-year"></span> Tu Agencia Tours. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
 </html>

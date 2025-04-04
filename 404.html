@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Página no encontrada - Tu Agencia Tours">
+    <meta name="robots" content="noindex, follow">
+    
+    <title>Página No Encontrada - Tu Agencia Tours</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Favicon -->
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        .error-container {
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 50px 20px;
+        }
+        .error-code {
+            font-size: 120px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            line-height: 1;
+        }
+        .error-message {
+            font-size: 24px;
+            margin-bottom: 30px;
+            color: var(--dark-color);
+        }
+        .error-description {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+            color: var(--text-color);
+        }
+        .error-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        @media (max-width: 576px) {
+            .error-code {
+                font-size: 80px;
+            }
+            .error-message {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <nav class="navbar">
+            <div class="container">
+                <a href="index.html" class="navbar-logo">
+                    <img src="images/logo.png" alt="Logo Tu Agencia Tours" height="50">
+                </a>
+                <button class="navbar-toggler" aria-label="Toggle navigation">☰</button>
+                <ul class="navbar-menu">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="tours.html">Tours</a></li>
+                    <li><a href="about.html">Sobre Nosotros</a></li>
+                    <li><a href="contact.html">Contacto</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="error-container">
+            <div class="error-code">404</div>
+            <h1 class="error-message">Página No Encontrada</h1>
+            <p class="error-description">Lo sentimos, la página que estás buscando no existe o ha sido movida. Te invitamos a explorar nuestros tours o regresar a la página de inicio.</p>
+            <div class="error-links">
+                <a href="index.html" class="btn btn-primary">Ir a Inicio</a>
+                <a href="tours.html" class="btn btn-secondary">Ver Tours</a>
+                <a href="contact.html" class="btn btn-secondary">Contactar</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section about">
+                    <img src="images/logo.png" alt="Logo Tu Agencia Tours" height="40" style="margin-bottom: 10px;">
+                    <p>Tu agencia de confianza para descubrir las maravillas de Las Terrenas y la península de Samaná.</p>
+                    <div class="social-links">
+                        <a href="#" target="_blank" aria-label="Facebook"><img src="images/icon-facebook.svg" alt="Facebook"></a>
+                        <a href="#" target="_blank" aria-label="Instagram"><img src="images/icon-instagram.svg" alt="Instagram"></a>
+                        <a href="#" target="_blank" aria-label="WhatsApp"><img src="images/icon-whatsapp.svg" alt="WhatsApp"></a>
+                    </div>
+                </div>
+                <div class="footer-section links">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="tours.html">Tours</a></li>
+                        <li><a href="about.html">Sobre Nosotros</a></li>
+                        <li><a href="contact.html">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section contact-info">
+                    <h3>Contacto</h3>
+                    <p><img src="images/icon-pin.svg" alt="Dirección" class="contact-icon"> Calle Principal #123, Las Terrenas, Samaná, RD</p>
+                    <p><img src="images/icon-phone.svg" alt="Teléfono" class="contact-icon"> +1 (809) 123-4567</p>
+                    <p><img src="images/icon-email.svg" alt="Email" class="contact-icon"> info@tuagenciatours.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© <span id="current-year"></span> Tu Agencia Tours. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html> 
