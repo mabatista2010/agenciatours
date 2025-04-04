@@ -90,6 +90,78 @@ document.addEventListener('DOMContentLoaded', function() {
         subjectInput.value = `Consulta sobre el tour: ${tourSubject}`;
     }
 
+    // --- Countdown Timer para la Sección CTA ---
+    const countdown = {
+        days: document.getElementById('countdown-days'),
+        hours: document.getElementById('countdown-hours'),
+        minutes: document.getElementById('countdown-minutes'),
+        seconds: document.getElementById('countdown-seconds')
+    };
+
+    if (countdown.days && countdown.hours && countdown.minutes && countdown.seconds) {
+        // Establecer fecha objetivo: final del mes siguiente
+        const now = new Date();
+        const targetDate = new Date(now.getFullYear(), now.getMonth() + 1, 1); // Primer día del mes siguiente
+        
+        const updateCountdown = () => {
+            const currentTime = new Date();
+            const difference = targetDate - currentTime;
+            
+            if (difference <= 0) {
+                // Si la fecha objetivo ya pasó, establecemos una nueva fecha
+                targetDate.setMonth(targetDate.getMonth() + 1);
+            }
+            
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+            
+            // Actualizar los valores con formato de dos dígitos
+            countdown.days.textContent = days.toString().padStart(2, '0');
+            countdown.hours.textContent = hours.toString().padStart(2, '0');
+            countdown.minutes.textContent = minutes.toString().padStart(2, '0');
+            countdown.seconds.textContent = seconds.toString().padStart(2, '0');
+        };
+        
+        // Actualizar cada segundo
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    }
+
+    // --- Form Validation para el formulario de la sección CTA ---
+    const ctaForm = document.querySelector('.cta-form');
+    if (ctaForm) {
+        ctaForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simulación de envío de formulario
+            const submitButton = this.querySelector('button[type="submit"]');
+            const originalText = submitButton.textContent;
+            
+            submitButton.disabled = true;
+            submitButton.textContent = 'Enviando...';
+            
+            // Simular envío (reemplazar con tu lógica de envío real)
+            setTimeout(() => {
+                // Resetear el formulario
+                this.reset();
+                
+                // Mostrar mensaje de éxito
+                submitButton.textContent = '¡Enviado!';
+                
+                // Volver al estado original después de un tiempo
+                setTimeout(() => {
+                    submitButton.textContent = originalText;
+                    submitButton.disabled = false;
+                }, 2000);
+                
+                // Aquí podrías mostrar un mensaje de confirmación
+                alert('¡Gracias por suscribirte! Pronto recibirás nuestras ofertas exclusivas.');
+            }, 1500);
+        });
+    }
+
     // --- Carrusel de Tours ---
     const carouselContainer = document.querySelector('.carousel-container');
     const carouselDots = document.querySelectorAll('.carousel-dot');
@@ -248,6 +320,23 @@ document.addEventListener('DOMContentLoaded', function() {
         featureCards.forEach((card, index) => {
             card.classList.add('fade-in-element');
             card.classList.add(`delay-${(index % 3) * 100 + 100}`);
+        });
+        
+        // Para la sección CTA
+        const ctaElements = [
+            document.querySelector('.cta-left h2'),
+            document.querySelector('.cta-subtitle'),
+            document.querySelector('.cta-features'),
+            document.querySelector('.cta-offer'),
+            document.querySelector('.cta-buttons'),
+            document.querySelector('.cta-form-container')
+        ];
+        
+        ctaElements.forEach((element, index) => {
+            if (element) {
+                element.classList.add('fade-in-element');
+                element.classList.add(`delay-${index * 100 + 100}`);
+            }
         });
     };
     
