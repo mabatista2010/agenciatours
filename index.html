@@ -88,15 +88,31 @@
             <div class="container">
                 <a href="index.html" class="navbar-logo">
                     <img src="images/logo.png" alt="Logo Tu Agencia Tours" height="50">
-                    <!-- O usa texto: <span>Tu Agencia Tours</span> -->
                 </a>
-                <button class="navbar-toggler" aria-label="Toggle navigation">☰</button> <!-- Hamburger Icon -->
-                <ul class="navbar-menu">
-                    <li><a href="index.html" class="active">Inicio</a></li>
-                    <li><a href="tours.html">Tours</a></li>
-                    <li><a href="about.html">Sobre Nosotros</a></li>
-                    <li><a href="contact.html">Contacto</a></li>
-                </ul>
+                
+                <div class="navbar-main">
+                    <ul class="navbar-menu">
+                        <li><a href="index.html" class="active"><span>Inicio</span></a></li>
+                        <li><a href="tours.html"><span>Tours</span></a></li>
+                        <li><a href="about.html"><span>Sobre Nosotros</span></a></li>
+                        <li><a href="contact.html"><span>Contacto</span></a></li>
+                    </ul>
+                    
+                    <div class="navbar-actions">
+                        <a href="contact.html?tour=reserva" class="btn btn-navbar">Reservar Ahora</a>
+                        <div class="navbar-social">
+                            <a href="#" target="_blank" aria-label="WhatsApp" class="nav-social-link">
+                                <img src="images/icon-whatsapp.svg" alt="WhatsApp">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="navbar-toggler" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
         </nav>
     </header>

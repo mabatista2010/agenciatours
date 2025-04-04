@@ -1,45 +1,73 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-    // --- Mobile Menu Toggle ---
+    // --- Mobile Menu Toggle Mejorado ---
     const navbarToggler = document.querySelector('.navbar-toggler');
-    const navbarMenu = document.querySelector('.navbar-menu');
+    const navbar = document.querySelector('.navbar');
+    const navbarMain = document.querySelector('.navbar-main');
+    const header = document.querySelector('.main-header');
+    let menuOverlay;
 
-    if (navbarToggler && navbarMenu) {
-        navbarToggler.addEventListener('click', () => {
-            navbarMenu.classList.toggle('active');
-            // Opcional: Cambiar el icono del toggler (ej. a una 'X')
-             if (navbarMenu.classList.contains('active')) {
-                navbarToggler.innerHTML = '×'; // Icono 'X'
-                navbarToggler.setAttribute('aria-label', 'Cerrar navegación');
+    // Crear overlay para fondo del menú móvil
+    function createMenuOverlay() {
+        if (!document.querySelector('.menu-overlay')) {
+            menuOverlay = document.createElement('div');
+            menuOverlay.className = 'menu-overlay';
+            document.body.appendChild(menuOverlay);
+            
+            // Click en overlay cierra el menú
+            menuOverlay.addEventListener('click', closeMenu);
+        } else {
+            menuOverlay = document.querySelector('.menu-overlay');
+        }
+    }
+    
+    // Función para abrir el menú
+    function openMenu() {
+        navbarToggler.classList.add('active');
+        navbarMain.classList.add('active');
+        menuOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevenir scroll
+    }
+    
+    // Función para cerrar el menú
+    function closeMenu() {
+        navbarToggler.classList.remove('active');
+        navbarMain.classList.remove('active');
+        menuOverlay.classList.remove('active');
+        document.body.style.overflow = ''; // Restaurar scroll
+    }
+
+    if (navbarToggler && navbarMain) {
+        createMenuOverlay();
+
+        navbarToggler.addEventListener('click', function() {
+            if (this.classList.contains('active')) {
+                closeMenu();
             } else {
-                navbarToggler.innerHTML = '☰'; // Icono Hamburguesa
-                 navbarToggler.setAttribute('aria-label', 'Abrir navegación');
+                openMenu();
             }
         });
 
-        // Opcional: Cerrar menú al hacer clic en un enlace (para SPAs o si quieres ese comportamiento)
-        navbarMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (navbarMenu.classList.contains('active')) {
-                    navbarMenu.classList.remove('active');
-                    navbarToggler.innerHTML = '☰';
-                    navbarToggler.setAttribute('aria-label', 'Abrir navegación');
-                }
-            });
-        });
-
-         // Opcional: Cerrar menú si se hace clic fuera de él
-         document.addEventListener('click', (event) => {
-            const isClickInsideNav = navbarMenu.contains(event.target);
-            const isClickOnToggler = navbarToggler.contains(event.target);
-
-            if (!isClickInsideNav && !isClickOnToggler && navbarMenu.classList.contains('active')) {
-                navbarMenu.classList.remove('active');
-                navbarToggler.innerHTML = '☰';
-                 navbarToggler.setAttribute('aria-label', 'Abrir navegación');
-            }
+        // Cerrar menú al hacer clic en un enlace
+        navbarMain.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', closeMenu);
         });
     }
+
+    // --- Efecto de scroll para el header ---
+    function handleScroll() {
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    }
+    
+    // Inicializar el estado del header basado en la posición de scroll inicial
+    handleScroll();
+    
+    // Escuchar evento de scroll
+    window.addEventListener('scroll', handleScroll);
 
     // --- Footer: Actualizar Año Automáticamente ---
     const currentYearSpan = document.getElementById('current-year');
@@ -60,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             if(targetElement) {
                 // Calcula la posición del elemento, ajustando por la altura del navbar fijo
-                 const headerOffset = document.querySelector('.main-header')?.offsetHeight || 0; // Obtiene altura del header
+                 const headerOffset = header?.offsetHeight || 0; // Obtiene altura del header
                  const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
                  const offsetPosition = elementPosition - headerOffset - 15; // 15px de espacio extra
 
@@ -69,13 +97,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     top: offsetPosition,
                     behavior: "smooth"
                 });
-
-                // Cierra el menú móvil si está abierto después del scroll
-                if (navbarMenu && navbarMenu.classList.contains('active')) {
-                     navbarMenu.classList.remove('active');
-                     navbarToggler.innerHTML = '☰';
-                     navbarToggler.setAttribute('aria-label', 'Abrir navegación');
-                }
             }
         });
     });
