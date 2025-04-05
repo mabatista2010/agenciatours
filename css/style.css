@@ -677,7 +677,7 @@ main {
     /* Aumentamos considerablemente el tamaño de la imagen con una transformación */
     width: 100%;
     height: 100%;
-    transform: scale(5); /* Hacemos la imagen 3.5 veces más grande */
+    transform: scale(30); /* Hacemos la imagen 3.5 veces más grande */
     object-fit: contain;
     display: block;
 }
