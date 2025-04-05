@@ -2369,7 +2369,7 @@ main {
 .cta-feature {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 20px;
     background-color: rgba(255, 255, 255, 0.15);
     padding: 10px 15px;
     border-radius: 6px;
@@ -2384,8 +2384,8 @@ main {
 }
 
 .feature-icon {
-    width: 24px;
-    height: 24px;
+    width: 4px;
+    height: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
