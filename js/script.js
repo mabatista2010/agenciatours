@@ -1,73 +1,53 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-    // --- Mobile Menu Toggle Mejorado ---
+    // --- Mobile Menu Toggle Limpio ---
     const navbarToggler = document.querySelector('.navbar-toggler');
-    const navbar = document.querySelector('.navbar');
-    const navbarMain = document.querySelector('.navbar-main');
-    const header = document.querySelector('.main-header');
-    let menuOverlay;
-
-    // Crear overlay para fondo del menú móvil
-    function createMenuOverlay() {
-        if (!document.querySelector('.menu-overlay')) {
-            menuOverlay = document.createElement('div');
-            menuOverlay.className = 'menu-overlay';
-            document.body.appendChild(menuOverlay);
-            
-            // Click en overlay cierra el menú
-            menuOverlay.addEventListener('click', closeMenu);
-        } else {
-            menuOverlay = document.querySelector('.menu-overlay');
-        }
-    }
-    
-    // Función para abrir el menú
-    function openMenu() {
-        navbarToggler.classList.add('active');
-        navbarMain.classList.add('active');
-        menuOverlay.classList.add('active');
-        document.body.style.overflow = 'hidden'; // Prevenir scroll
-    }
-    
-    // Función para cerrar el menú
-    function closeMenu() {
-        navbarToggler.classList.remove('active');
-        navbarMain.classList.remove('active');
-        menuOverlay.classList.remove('active');
-        document.body.style.overflow = ''; // Restaurar scroll
-    }
+    const navbarMain = document.querySelector('.navbar-main'); 
+    // const menuOverlay = document.querySelector('.menu-overlay'); // Descomentar si usas overlay
 
     if (navbarToggler && navbarMain) {
-        createMenuOverlay();
-
         navbarToggler.addEventListener('click', function() {
-            if (this.classList.contains('active')) {
-                closeMenu();
-            } else {
-                openMenu();
-            }
+            // Alternar clase 'active' en el toggler y el menú principal
+            navbarToggler.classList.toggle('active');
+            navbarMain.classList.toggle('active');
+            
+            // (Opcional) Alternar overlay
+            // if (menuOverlay) menuOverlay.classList.toggle('active');
+
+            // (Opcional) Prevenir scroll del body cuando el menú está abierto
+            // document.body.style.overflow = navbarMain.classList.contains('active') ? 'hidden' : '';
         });
 
-        // Cerrar menú al hacer clic en un enlace
+        // (Opcional) Cerrar menú al hacer clic en el overlay
+        // if (menuOverlay) {
+        //     menuOverlay.addEventListener('click', function() {
+        //         navbarToggler.classList.remove('active');
+        //         navbarMain.classList.remove('active');
+        //         menuOverlay.classList.remove('active');
+        //         document.body.style.overflow = '';
+        //     });
+        // }
+
+        // Cerrar menú al hacer clic en un enlace dentro del menú
         navbarMain.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', closeMenu);
+            link.addEventListener('click', () => {
+                navbarToggler.classList.remove('active');
+                navbarMain.classList.remove('active');
+                // if (menuOverlay) menuOverlay.classList.remove('active'); // Si usas overlay
+                // document.body.style.overflow = ''; // Si previenes scroll
+            });
         });
     }
 
-    // --- Efecto de scroll para el header ---
-    function handleScroll() {
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-    }
-    
-    // Inicializar el estado del header basado en la posición de scroll inicial
-    handleScroll();
-    
-    // Escuchar evento de scroll
-    window.addEventListener('scroll', handleScroll);
+    // --- Efecto de scroll para el header (ya no es necesario si es siempre blanco) ---
+    // window.addEventListener('scroll', function() {
+    //     if (window.scrollY > 50) {
+    //         header.classList.add('scrolled');
+    //     } else {
+    //         header.classList.remove('scrolled');
+    //     }
+    // });
+    // handleScroll(); // Llamar inicialmente si se mantiene el efecto
 
     // --- Footer: Actualizar Año Automáticamente ---
     const currentYearSpan = document.getElementById('current-year');
