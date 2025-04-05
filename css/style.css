@@ -673,11 +673,12 @@ main {
     padding: 0;
 }
 
-.feature-icon {
+/* Modificamos esta clase para añadir un selector más específico */
+.feature-icon-container .feature-icon {
     /* Aumentamos considerablemente el tamaño de la imagen con una transformación */
     width: 100%;
     height: 100%;
-    transform: scale(30); /* Hacemos la imagen 3.5 veces más grande */
+    transform: scale(1); /* Hacemos la imagen 30 veces más grande */
     object-fit: contain;
     display: block;
 }
@@ -2369,7 +2370,7 @@ main {
 .cta-feature {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 15px;
     background-color: rgba(255, 255, 255, 0.15);
     padding: 10px 15px;
     border-radius: 6px;
@@ -2384,8 +2385,8 @@ main {
 }
 
 .feature-icon {
-    width: 4px;
-    height: 4px;
+    width: 18px;
+    height: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
