@@ -636,7 +636,7 @@ main {
 
 /* --- Why Choose Us / Features --- */
 .why-choose-us {
-    /* background-color: var(--light-color); /* Ya lo tienes probablemente */
+    background-color: var(--light-color);
 }
 
 .features-grid {
@@ -670,15 +670,16 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 15px; /* Añadir padding para que el icono no toque los bordes */
+    padding: 0;
 }
 
 .feature-icon {
-    /* El icono usará el 100% del espacio disponible dentro del padding */
-    width: 100%; 
+    /* Aumentamos considerablemente el tamaño de la imagen con una transformación */
+    width: 100%;
     height: 100%;
-    object-fit: contain; /* Escala manteniendo la proporción */
-    margin: 0 auto; /* No necesario con flex, pero por si acaso */
+    transform: scale(5); /* Hacemos la imagen 3.5 veces más grande */
+    object-fit: contain;
+    display: block;
 }
 
 .feature-content h3 {
