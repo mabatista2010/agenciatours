@@ -1121,68 +1121,6 @@ main {
         height: 40px; /* Logo más pequeño */
     }
 
-    .navbar-menu {
-        display: flex; /* Cambiamos el display para asegurar que el menú es visible */
-        position: fixed; /* Cambiamos a fixed en lugar de absolute para mejor comportamiento */
-        top: var(--navbar-height); /* Justo debajo del header */
-        left: 0;
-        width: 100%;
-        background-color: #ffffff; /* Fondo sólido blanco para legibilidad */
-        flex-direction: column;
-        align-items: stretch;
-        box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-        border-top: 1px solid #eee;
-        max-height: 0; /* Inicialmente colapsado */
-        overflow: hidden; /* Ocultar contenido colapsado */
-        padding: 0; /* Sin padding inicialmente */
-        transition: max-height 0.3s ease, padding 0.3s ease; /* Transición suave */
-        z-index: 999; /* Aseguramos que esté por encima de otros elementos */
-    }
-
-    .navbar-menu.active { /* Clase que se añade con JS */
-        max-height: calc(100vh - var(--navbar-height)); /* Altura máxima cuando está activo */
-        padding: 10px 0; /* Espacio al final y al inicio */
-        overflow-y: auto; /* Scroll si hay muchos items */
-    }
-
-    .navbar-menu li {
-        margin: 0;
-        width: 100%;
-        text-align: center;
-        border-bottom: 1px solid #eee;
-    }
-     .navbar-menu li:last-child {
-        border-bottom: none;
-    }
-
-    .navbar-menu a {
-        width: 100%;
-        padding: 15px; /* Padding uniforme */
-        display: block;
-        font-size: 1rem; /* Tamaño de fuente menú móvil */
-        font-weight: 500; /* Color oscuro para contraste */
-        color: var(--dark-color); /* Aseguramos color oscuro */
-        text-shadow: none; /* Eliminamos la sombra del texto que era necesaria sobre el fondo transparente */
-    }
-     .navbar-menu a.active {
-        color: var(--primary-color); /* Color azul para el elemento activo */
-        background-color: rgba(var(--primary-color-rgb), 0.1); /* Fondo sutilmente azulado */
-        font-weight: 600; /* Color oscuro para contraste */
-    }
-     .navbar-menu a:hover {
-        background-color: var(--light-color); /* Fondo gris claro al pasar el cursor */
-        color: var(--primary-color); /* Texto azul al pasar el cursor */
-    }
-    
-    /* Alineación vertical del logo y el botón hamburguesa */
-    .navbar {
-        padding: 0; /* Quitar padding extra */
-    }
-    
-    .navbar-logo img {
-        height: 40px; /* Logo más pequeño en móvil */
-    }
-    
     .navbar-toggler {
         display: block; /* Muestra el botón hamburguesa */
         background: transparent;
